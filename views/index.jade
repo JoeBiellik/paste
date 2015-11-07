@@ -1,0 +1,47 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600')
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css')
+  style.
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+    body {
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin-bottom: 60px;
+    }
+    textarea, textarea:required, textarea:invalid {
+      font-family: monospace, serif;
+      box-shadow: none;
+    }
+    footer {
+      width: 100%;
+      height: 35px;
+      position: absolute;
+      bottom: 0;
+      line-height: 35px;
+    }
+block content
+  main.container.m-t-lg
+    h1.display-3.m-b-lg #{title}
+
+    a(href='https://github.com/JoeBiellik/paste')
+      img(style='position: absolute; top: 0; right: 0; border: 0;', src='https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png', alt='Fork me on GitHub')
+
+    form(action='/?redirect', method='POST', accept-charset='UTF-8')
+      fieldset.form-group
+        textarea.form-control(name='paste', rows='5', required, autofocus)
+      select.c-select.select-lg.m-t-md(name='highlight')
+        option(value='', selected) Choose syntax highlighting
+        each val, key in highlights
+          option(value='#{key}') #{val}
+      button.btn.btn-primary.btn-lg.m-t-md.m-l-md.pull-right(type='submit') Upload
+
+  footer.hidden-sm-down
+    pre.text-center.text-muted.m-b-0.
+      echo 'Hello World' | curl -F 'paste=&lt;-' #{url}
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.13/autosize.min.js')
+  script.
+    autosize(document.querySelector('textarea'));

@@ -1,0 +1,9 @@
+db:
+  image: mongo:latest
+  command: "--smallfiles"
+  hostname: "db"
+  container_name: "db"
+  ports:
+   - "27017:27017"
+  volumes:
+   - ~/mongo:/data/db
