@@ -40,8 +40,20 @@ block content
       button.btn.btn-primary.btn-lg.m-t-md.m-l-md.pull-right(type='submit') Upload
 
   footer.hidden-sm-down
-    pre.text-center.text-muted.m-b-0.
+    pre.text-center.text-muted.m-b-0(onclick='selectCommand(this);').
       echo 'Hello World' | curl -F 'paste=&lt;-' #{url}
   script(src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.13/autosize.min.js')
   script.
     autosize(document.querySelector('textarea'));
+
+    function selectCommand(el) {
+      var range = document.createRange();
+
+      range.setStart(el.firstChild, 19);
+      range.setEnd(el.firstChild, el.firstChild.textContent.length);
+
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+
+      return false;
+    }
