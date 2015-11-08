@@ -1,4 +1,8 @@
-require('babel/register');
+require('babel-polyfill');
+require('babel-core/register')({
+	presets: ['es2015']
+});
+
 var config = require('config');
 var app = require('koa')();
 var router = require('./router');
