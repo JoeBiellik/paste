@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/github/license/JoeBiellik/paste.svg)](http://opensource.org/licenses/MIT)
 [![Release Version](https://img.shields.io/github/release/JoeBiellik/paste.svg)](https://github.com/JoeBiellik/paste/releases)
 [![Dependencies](https://img.shields.io/david/JoeBiellik/paste.svg)](https://david-dm.org/JoeBiellik/paste)
-[![Node.js Version](https://img.shields.io/badge/node.js-%3E=_0.11-red.svg)](https://nodejs.org/download/)
+[![Node.js Version](https://img.shields.io/badge/node.js-%3E=_4.0-red.svg)](https://nodejs.org/download/)
 
 Simple [Node.js](https://nodejs.org/) pastebin built with [Koa](http://koajs.com/), [MongoDB](https://www.mongodb.org/), [Jade](http://jade-lang.com/), [Bootstrap 4](http://v4-alpha.getbootstrap.com/) and [Prism.js](http://prismjs.com/).
 
