@@ -6,7 +6,8 @@ router.get('/', function *() {
 	yield this.render('index', {
 		pretty: config.prettyHtml,
 		title: 'Paste',
-		url: this.request.origin + '/',
+		url: this.request.origin,
+		expires: config.expires,
 		highlights: config.highlights
 	});
 });

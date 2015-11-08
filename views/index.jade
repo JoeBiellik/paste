@@ -1,7 +1,7 @@
 extends layout
 
 block head
-  link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600')
+  link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400,300')
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css')
   style.
     html {
@@ -33,10 +33,17 @@ block content
     form(action='/?redirect', method='POST', accept-charset='UTF-8')
       fieldset.form-group
         textarea.form-control(name='paste', rows='5', required, autofocus)
-      select.c-select.select-lg.m-t-md(name='highlight')
+
+      select.c-select.select-lg.m-t-md.m-r-md(name='highlight')
         option(value='', selected) Choose syntax highlighting
         each val, key in highlights
           option(value='#{key}') #{val}
+
+      select.c-select.select-lg.m-t-md(name='expire')
+        option(value='', selected) Choose expiry
+        each val, key in expires
+          option(value='#{key}') #{val}
+
       button.btn.btn-primary.btn-lg.m-t-md.m-l-md.pull-right(type='submit') Upload
 
   footer.hidden-sm-down
