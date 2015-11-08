@@ -2,11 +2,11 @@ node:
   image: node:latest
   command: "npm start"
   working_dir: /app
-  links: 
+  links:
    - db
   environment:
    - NODE_ENV=docker
-   volumes:
+  volumes:
    - .:/app
   ports:
    - 3000:80
