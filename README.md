@@ -1,5 +1,5 @@
 # paste
-[![License](https://img.shields.io/github/license/JoeBiellik/paste.svg)](http://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/github/license/JoeBiellik/paste.svg)](LICENSE.md)
 [![Node.js Version](https://img.shields.io/badge/node.js-%3E=_4.0-red.svg)](https://nodejs.org/)
 [![Release Version](https://img.shields.io/github/release/JoeBiellik/paste.svg)](https://github.com/JoeBiellik/paste/releases)
 [![Dependencies](https://img.shields.io/david/JoeBiellik/paste.svg)](https://david-dm.org/JoeBiellik/paste)
