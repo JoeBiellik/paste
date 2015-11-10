@@ -11,7 +11,7 @@ Try it out at [paste.fyi](http://paste.fyi/)
 ## Features
 * Clean code thanks to ES7 async/await, [Koa](http://koajs.com/) and [Babel](https://babeljs.io/)
 * Full syntax highlighting via [Prism.js](http://prismjs.com/)
-* `Ctrl+Enter` hotkey for quick paste submission
+* <kbd>CTRL</kbd>+<kbd>Enter</kbd> hotkey for quick paste submission
 * Short URLs via [shortid](https://github.com/dylang/shortid), e.g. `NyQO9puMe`
 * Full support for CLI requests with [curl](http://curl.haxx.se/) etc
 * Textarea grows to fit content via [autosize](https://github.com/jackmoore/autosize)
