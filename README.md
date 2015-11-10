@@ -4,18 +4,36 @@
 [![Release Version](https://img.shields.io/github/release/JoeBiellik/paste.svg)](https://github.com/JoeBiellik/paste/releases)
 [![Dependencies](https://img.shields.io/david/JoeBiellik/paste.svg)](https://david-dm.org/JoeBiellik/paste)
 
-Simple [Node.js](https://nodejs.org/) pastebin built with [Koa](http://koajs.com/), [MongoDB](https://www.mongodb.org/), [Jade](http://jade-lang.com/), [Bootstrap 4](http://v4-alpha.getbootstrap.com/) and [Prism.js](http://prismjs.com/).
+> Simple [Node.js](https://nodejs.org/) pastebin built with [Koa](http://koajs.com/), [MongoDB](https://www.mongodb.org/), [Jade](http://jade-lang.com/), [Bootstrap 4](http://v4-alpha.getbootstrap.com/) and [Prism.js](http://prismjs.com/).
 
 Try it out at [paste.fyi](http://paste.fyi/)
 
 ## Features
 * Clean code thanks to ES7 async/await, [Koa](http://koajs.com/) and [Babel](https://babeljs.io/)
 * Full syntax highlighting via [Prism.js](http://prismjs.com/)
+* `Ctrl+Enter` hotkey for quick paste submission
 * Short URLs via [shortid](https://github.com/dylang/shortid), e.g. `NyQO9puMe`
 * Full support for CLI requests with [curl](http://curl.haxx.se/) etc
+* Textarea grows to fit content via [autosize](https://github.com/jackmoore/autosize)
 * Automatic and configurable paste expiry
 * Runs fully containerized with [Docker](https://www.docker.com/) and [Vagrant](https://www.vagrantup.com/)
 * Simple and responsive UI built with [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
+
+## Usage
+```sh
+# Simple paste
+$ echo 'Hello World' | curl -F 'paste=<-' http://paste.fyi
+http://paste.fyi/N15FNVqfg
+
+# wget or any other tool is fine too:
+$ wget --post-data 'paste=Hello from wget' -qO- http://paste.fyi
+
+# Either form or multipart data is accepted:
+$ curl -d 'paste=Sent as multipart' http://paste.fyi
+
+# Specify the syntax to highlight:
+$ git diff production.yml | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
+```
 
 ## Development
 1. Clone this repo:
