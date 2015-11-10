@@ -2,7 +2,7 @@ $(document).ready(function() {
 	autosize($('textarea'));
 
 	$('textarea').keydown(function(e) {
-		if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
+		if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey && $(this).val()) {
 			$(this).closest('form').submit();
 		}
 	});
