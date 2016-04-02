@@ -1,6 +1,6 @@
 # paste
 [![License](https://img.shields.io/github/license/JoeBiellik/paste.svg)](LICENSE.md)
-[![Node.js Version](https://img.shields.io/badge/node.js-%3E=_4.0-red.svg)](https://nodejs.org/)
+[![Node.js Version](https://img.shields.io/badge/node.js-%3E=_4.0-orange.svg)](https://nodejs.org/)
 [![Release Version](https://img.shields.io/github/release/JoeBiellik/paste.svg)](https://github.com/JoeBiellik/paste/releases)
 [![Dependencies](https://img.shields.io/david/JoeBiellik/paste.svg)](https://david-dm.org/JoeBiellik/paste)
 
@@ -32,7 +32,7 @@ $ wget --post-data 'paste=Hello from wget' -qO- http://paste.fyi
 $ curl -d 'paste=Sent as multipart' http://paste.fyi
 
 # Specify the syntax to highlight:
-$ git diff production.yml | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
+$ git diff README.md | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
 ```
 
 ## Development
@@ -54,7 +54,7 @@ $ git diff production.yml | curl -F 'paste=<-' -F 'highlight=diff' http://paste.
 
 5. Start MongoDB:
   ```sh
-  docker-compose up -d
+  docker-compose up db -d
   ```
 
 5. Start app and watch for changes:
@@ -67,5 +67,5 @@ $ git diff production.yml | curl -F 'paste=<-' -F 'highlight=diff' http://paste.
 
 2. Start the production database and Node.js server:
   ```sh
-  docker-compose -f production.yml up -d
+  docker-compose up
   ```
