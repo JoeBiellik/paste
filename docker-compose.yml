@@ -1,7 +1,23 @@
-db:
-  image: mongo:latest
-  command: "--smallfiles"
-  ports:
-   - 27017:27017
-  volumes:
-   - ~/db:/data/db
+version: '2'
+services:
+  app:
+    container_name: app
+    image: node:latest
+    command: "npm run watch"
+    working_dir: /app
+    links:
+     - db
+    volumes:
+     - .:/app
+    ports:
+     - "3000:80"
+    environment:
+     - NODE_ENV=docker
+  db:
+    container_name: db
+    image: mongo:latest
+    command: "--smallfiles"
+    volumes:
+     - ./db:/data/db
+    expose:
+     - 27017
