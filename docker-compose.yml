@@ -3,7 +3,7 @@ services:
   app:
     container_name: app
     image: node:latest
-    command: "npm run watch"
+    command: "npm start"
     working_dir: /app
     links:
      - db
