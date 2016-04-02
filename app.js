@@ -22,8 +22,8 @@ app.use(require('koa-body')({
 	formLimit: config.sizeLimit,
 	textLimit: config.sizeLimit
 }));
-app.use(require('koa-views')('./views', {
-	default: 'jade'
+app.use(require('koa-views')(__dirname + '/views', {
+	extension: 'jade'
 }));
 
 app.use(router.routes(), router.allowedMethods());
