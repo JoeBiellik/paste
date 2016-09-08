@@ -12,6 +12,6 @@
     "semi": ["error", "always"],
     "no-trailing-spaces": ["warn"],
     "comma-dangle": ["error"],
-    "no-console": ["warn", { allow: ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
   }
 }

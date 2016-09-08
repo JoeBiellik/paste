@@ -19,8 +19,8 @@
   ],
   "main": "server.js",
   "scripts": {
-    "watch": "./node_modules/.bin/nodemon -L -e js,json",
-    "lint": "./node_modules/.bin/eslint . && ./node_modules/.bin/pug-lint ./views/"
+    "watch": "nodemon -L -e js,json",
+    "lint": "eslint . && pug-lint ./views"
   },
   "dependencies": {
     "babel-core": "^6.1.2",
