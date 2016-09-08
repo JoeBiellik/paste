@@ -63,6 +63,6 @@ block content
     pre.text-md-center.text-muted.m-b-0.
       echo 'Hello World' | curl -F 'paste=&lt;-' #{url}
 
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.17/autosize.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.17/autosize.min.js' integrity='sha256-rQ8P/c1io8GRjdDlGwb1K+iUGnS9ZwLPlwh1KpC/02w=', crossorigin='anonymous')
   script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
   script(src='/main.js')
