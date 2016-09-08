@@ -2,7 +2,7 @@ var config = require('config');
 var Paste = require('../models/paste');
 
 module.exports = {
-	*view(next) {
+	*view() {
 		try {
 			let paste = yield Paste.findById(this.params.id).exec();
 			let lang = Object.keys(this.query)[0];
@@ -23,7 +23,7 @@ module.exports = {
 		}
 	},
 
-	*create(next) {
+	*create() {
 		if (this.request.body.fields) {
 			if (this.request.body.fields.paste) {
 				this.request.body.paste = this.request.body.fields.paste;

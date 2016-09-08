@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* global $ autosize */
+
 $(document).ready(function() {
 	autosize($('textarea'));
 
@@ -17,7 +20,7 @@ $(document).ready(function() {
 		window.getSelection().addRange(range);
 	});
 
-	$('select#highlight').change(function(e) {
+	$('select#highlight').change(function() {
 		location.hash = $(this).val();
 	});
 
