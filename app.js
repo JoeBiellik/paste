@@ -23,7 +23,7 @@ app.use(require('koa-body')({
 	textLimit: config.sizeLimit
 }));
 app.use(require('koa-views')(__dirname + '/views', {
-	extension: 'jade'
+	extension: 'pug'
 }));
 
 app.use(router.routes(), router.allowedMethods());

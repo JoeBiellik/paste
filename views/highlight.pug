@@ -1,0 +1,30 @@
+extends layout
+
+block head
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.5.1/themes/prism-coy.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.5.1/plugins/line-numbers/prism-line-numbers.css')
+  style.
+    html, body {
+      height: 100%;
+    }
+    html, body, code, pre {
+      min-height: 100%;
+    }
+    pre[class*="language-"] {
+      margin: 0;
+      box-shadow: none;
+      max-height: none;
+      border-left: none;
+    }
+    pre[class*="language-"]::before, pre[class*="language-"]::after {
+      box-shadow: none;
+      display: none;
+    }
+
+block content
+  pre.line-numbers
+    code(class='language-' + lang)
+      | #{paste}
+  script(src='https://cdn.jsdelivr.net/prism/1.5.1/prism.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.5.1/components/prism-' + lang + '.min.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.5.1/plugins/line-numbers/prism-line-numbers.min.js')

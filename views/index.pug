@@ -8,7 +8,7 @@ block head
       min-height: 100%;
     }
     body {
-      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       margin-bottom: 60px;
     }
     @media (min-width: 1800px) {
@@ -26,6 +26,7 @@ block head
     }
     textarea, textarea:required, textarea:invalid {
       font-family: monospace, serif;
+      line-height: 1.5em;
       box-shadow: none;
     }
     footer {
@@ -46,15 +47,15 @@ block content
       fieldset.form-group
         textarea.form-control(name='paste', rows='10', required, autofocus)
 
-      select#highlight.c-select.select-lg.m-t-2.m-r-2(name='highlight')
+      select#highlight.custom-select.select-lg.m-t-2.m-r-2(name='highlight')
         option(value='', selected) Choose syntax highlighting
         each val, key in highlights
-          option(value='#{key}') #{val}
+          option(value=key) #{val}
 
-      select#expire.c-select.select-lg.m-t-2(name='expire')
+      select#expire.custom-select.select-lg.m-t-2(name='expire')
         option(value='', selected) Choose expiry
         each val, key in expires
-          option(value='#{key}') #{val}
+          option(value=key) #{val}
 
       button.btn.btn-primary.btn-lg.m-t-2.m-l-2.pull-md-right(type='submit') Upload
 
@@ -62,6 +63,6 @@ block content
     pre.text-md-center.text-muted.m-b-0.
       echo 'Hello World' | curl -F 'paste=&lt;-' #{url}
 
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.15/autosize.min.js')
-  script(src='https://code.jquery.com/jquery-2.2.2.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.17/autosize.min.js')
+  script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
   script(src='/main.js')
