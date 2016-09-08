@@ -1,16 +1,16 @@
 /* eslint-env browser */
 /* global $ autosize */
 
-$(document).ready(function() {
+$(function() {
 	autosize($('textarea'));
 
-	$('textarea').keydown(function(e) {
+	$('textarea').on('keydown', function(e) {
 		if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey && $(this).val()) {
 			$(this).closest('form').submit();
 		}
 	});
 
-	$('pre').click(function() {
+	$('pre').on('click', function() {
 		var range = document.createRange();
 
 		range.setStart(this.firstChild, 19);
@@ -20,7 +20,7 @@ $(document).ready(function() {
 		window.getSelection().addRange(range);
 	});
 
-	$('select#highlight').change(function() {
+	$('select#highlight').on('change', function() {
 		location.hash = $(this).val();
 	});
 
