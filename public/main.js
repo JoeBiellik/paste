@@ -24,7 +24,7 @@ $(document).ready(function() {
 	$(window).on('hashchange', function() {
 		var value = location.hash.slice(1);
 
-		if ($('select#highlight option[value=' + value + ']').length) {
+		if (value && $('select#highlight option[value=' + value + ']').length) {
 			$('select#highlight').val(value);
 		} else {
 			$('select#highlight').val('');

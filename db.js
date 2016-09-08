@@ -3,6 +3,7 @@ var util = require('util');
 var mongoose = require('mongoose');
 
 module.exports = function () {
+	mongoose.Promise = global.Promise;
 	mongoose.connect(config.db); 
 
 	mongoose.connection.once('open', function () {
