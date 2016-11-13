@@ -39,7 +39,7 @@
     "shortid": "^2.2.4"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
+    "babel-eslint": "^7.1.0",
     "eslint": "^3.2.2",
     "nodemon": "^1.7.2",
     "pug-lint": "^2.3.0"
