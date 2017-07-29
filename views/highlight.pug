@@ -2,6 +2,7 @@ extends layout
 
 block head
   link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.5.1/themes/prism-coy.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.6.0/plugins/toolbar/prism-toolbar.css')
   link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.5.1/plugins/line-numbers/prism-line-numbers.css')
   style.
     html, body {
@@ -20,11 +21,38 @@ block head
       box-shadow: none;
       display: none;
     }
+    pre.code-toolbar > .toolbar {
+      top: 20px;
+      right: 20px;
+      opacity: .5;
+    }
+    pre.code-toolbar > .toolbar a,
+    pre.code-toolbar > .toolbar button,
+    pre.code-toolbar > .toolbar span {
+      padding: .5rem 1rem;
+      font-size: 1.25rem;
+      color: #fff;
+      background-color: #0275d8;
+      border-color: #0275d8;
+      border-radius: .3rem;
+    }
+    pre.code-toolbar > .toolbar a:hover,
+    pre.code-toolbar > .toolbar a:focus,
+    pre.code-toolbar > .toolbar button:hover,
+    pre.code-toolbar > .toolbar button:focus,
+    pre.code-toolbar > .toolbar span:hover,
+    pre.code-toolbar > .toolbar span:focus {
+      color: #fff;
+      background-color: #025aa5;
+    }
 
 block content
   pre.line-numbers
     code(class='language-' + lang)
       | #{paste}
-  script(src='https://cdn.jsdelivr.net/prism/1.5.1/prism.js')
-  script(src='https://cdn.jsdelivr.net/prism/1.5.1/components/prism-' + lang + '.min.js')
-  script(src='https://cdn.jsdelivr.net/prism/1.5.1/plugins/line-numbers/prism-line-numbers.min.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.6.0/prism.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.6.0/components/prism-' + lang + '.min.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.6.0/plugins/toolbar/prism-toolbar.min.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.6.0/plugins/line-numbers/prism-line-numbers.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js')
+  script(src='https://cdn.jsdelivr.net/prism/1.6.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js')
