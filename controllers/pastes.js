@@ -1,62 +1,62 @@
-var config = require('config');
-var Paste = require('../models/paste');
+const config = require('config');
+const Paste = require('../models/paste');
 
 module.exports = {
-	*view() {
+	async view(ctx) {
 		try {
-			let paste = yield Paste.findById(this.params.id).exec();
-			let lang = Object.keys(this.query)[0];
+			let paste = await Paste.findById(ctx.params.id).exec();
+			let lang = Object.keys(ctx.query)[0];
 
 			if (lang) {
-				yield this.render('highlight', {
+				await ctx.render('highlight', {
 					pretty: config.prettyHtml,
-					title: 'Paste ' + paste.id,
+					title: config.name + ' ' + paste.id,
 					paste: paste.paste,
 					lang: lang
 				});
 			} else {
-				this.type = 'text/plain';
-				this.body = paste.paste;
+				ctx.type = 'text/plain';
+				ctx.body = paste.paste;
 			}
 		} catch (ex) {
-			this.throw('Paste Not Found', 404);
+			ctx.throw('Paste Not Found', 404);
 		}
 	},
 
-	*create() {
-		if (this.request.body.fields) {
-			if (this.request.body.fields.paste) {
-				this.request.body.paste = this.request.body.fields.paste;
+	async create(ctx) {
+		if (ctx.request.body.fields) {
+			if (ctx.request.body.fields.paste) {
+				ctx.request.body.paste = ctx.request.body.fields.paste;
 			}
-			if (this.request.body.fields.highlight) {
-				this.request.body.highlight = this.request.body.fields.highlight;
+			if (ctx.request.body.fields.highlight) {
+				ctx.request.body.highlight = ctx.request.body.fields.highlight;
 			}
-			if (this.request.body.fields.expire) {
-				this.request.body.expire = this.request.body.fields.expire;
+			if (ctx.request.body.fields.expire) {
+				ctx.request.body.expire = ctx.request.body.fields.expire;
 			}
 		}
 
-		if (!this.request.body.expire) {
-			this.request.body.expire = config.expiresDefault;
+		if (!ctx.request.body.expire) {
+			ctx.request.body.expire = config.expiresDefault;
 		}
 
 		let paste = new Paste({
-			paste: this.request.body.paste,
-			expiresAt: new Date(Date.now() + this.request.body.expire * 1000)
+			paste: ctx.request.body.paste,
+			expiresAt: new Date(Date.now() + ctx.request.body.expire * 1000)
 		});
 
-		yield paste.save();
+		await paste.save();
 
 		let link = paste.id;
 
-		if (this.request.body.highlight) {
-			link += '?' + this.request.body.highlight;
+		if (ctx.request.body.highlight) {
+			link += '?' + ctx.request.body.highlight;
 		}
 
-		if (Object.keys(this.query).includes('redirect')) {
-			this.redirect(link);
+		if (Object.keys(ctx.query).includes('redirect')) {
+			ctx.redirect(link);
 		} else {
-			this.body = this.request.origin + '/' + link + '\n';
+			ctx.body = ctx.request.origin + '/' + link + '\n';
 		}
 	}
 };

@@ -1,16 +1,16 @@
-var config = require('config');
-var util = require('util');
-var mongoose = require('mongoose');
+const config = require('config');
+const util = require('util');
+const mongoose = require('mongoose');
 
-module.exports = function() {
+module.exports = () => {
 	mongoose.Promise = global.Promise;
-	mongoose.connect(config.db);
 
-	mongoose.connection.once('open', function() {
-		util.log('MongoDB connection open');
-	});
-
+	mongoose.connection.once('open', util.log.bind(util, 'MongoDB connection open'));
 	mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+	mongoose.connect(config.db, {
+		useMongoClient: true
+	});
 
 	return mongoose.connection;
 };

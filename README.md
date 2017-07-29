@@ -8,12 +8,12 @@
 Try it out at [paste.fyi](http://paste.fyi/)
 
 ## Features
-* Clean code thanks to ES7 async/await, [Koa](http://koajs.com/) and [Babel](https://babeljs.io/)
+* Clean code thanks to ES7 async/await and [Koa v2](http://koajs.com/)
 * Full syntax highlighting via [Prism.js](http://prismjs.com/)
 * <kbd>CTRL</kbd>+<kbd>Enter</kbd> hotkey for quick paste submission
 * Short URLs via [shortid](https://github.com/dylang/shortid), e.g. `NyQO9puMe`
 * Full support for CLI requests with [curl](http://curl.haxx.se/) etc
-* Textarea grows to fit content via [autosize](https://github.com/jackmoore/autosize)
+* Textarea grows to fit content via [autosize.js](https://github.com/jackmoore/autosize)
 * Automatic and configurable paste expiry
 * Runs fully containerized with [Docker](https://www.docker.com/) and [Vagrant](https://www.vagrantup.com/)
 * Simple and responsive UI built with [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
@@ -53,7 +53,7 @@ $ git diff README.md | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
 
 5. Start MongoDB:
   ```sh
-  docker-compose up db -d
+  docker-compose up -d db
   ```
 
 5. Start app and watch for changes:
