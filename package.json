@@ -25,7 +25,7 @@
   "dependencies": {
     "config": "^1.16.0",
     "koa": "^2.3.0",
-    "koa-body": "^2.3.0",
+    "koa-body": "^3.0.0",
     "koa-compress": "^2.0.0",
     "koa-logger": "^3.0.1",
     "koa-router": "^7.2.1",
