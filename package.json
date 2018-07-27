@@ -23,7 +23,7 @@
     "lint": "eslint . && pug-lint ./views"
   },
   "dependencies": {
-    "config": "^1.16.0",
+    "config": "^2.0.0",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
     "koa-compress": "^2.0.0",
