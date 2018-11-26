@@ -8,8 +8,10 @@ module.exports = () => {
 	mongoose.connection.once('open', util.log.bind(util, 'MongoDB connection open'));
 	mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+	mongoose.set('useCreateIndex', true);
+
 	mongoose.connect(config.db, {
-		useMongoClient: true
+		useNewUrlParser: true
 	});
 
 	return mongoose.connection;

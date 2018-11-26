@@ -1,58 +1,50 @@
 extends layout
 
 block head
-  link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.5.1/themes/prism-coy.css')
-  link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.6.0/plugins/toolbar/prism-toolbar.css')
-  link(rel='stylesheet', href='https://cdn.jsdelivr.net/prism/1.5.1/plugins/line-numbers/prism-line-numbers.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/themes/prism-coy.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/plugins/toolbar/prism-toolbar.css')
+  link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/plugins/line-numbers/prism-line-numbers.css')
   style.
-    html, body {
+    html, body, .code-toolbar, pre, code {
       height: 100%;
-    }
-    html, body, code, pre {
-      min-height: 100%;
     }
     pre[class*="language-"] {
       margin: 0;
-      box-shadow: none;
-      max-height: none;
-      border-left: none;
     }
     pre[class*="language-"]::before, pre[class*="language-"]::after {
-      box-shadow: none;
       display: none;
     }
-    pre.code-toolbar > .toolbar {
-      top: 20px;
-      right: 20px;
-      opacity: .5;
+    .code-toolbar > .toolbar {
+      top: 1rem;
+      right: 1rem;
+      opacity: 1;
     }
-    pre.code-toolbar > .toolbar a,
-    pre.code-toolbar > .toolbar button,
-    pre.code-toolbar > .toolbar span {
-      padding: .5rem 1rem;
-      font-size: 1.25rem;
+    pre[class*="language-"] > code {
+      border-left: none;
+    }
+    .code-toolbar > .toolbar a, .code-toolbar > .toolbar button, .code-toolbar > .toolbar span {
+      padding: 0.25rem 1rem 0.5rem;
+      font-size: 1.2rem;
       color: #fff;
       background-color: #0275d8;
       border-color: #0275d8;
       border-radius: .3rem;
+      opacity: 0.5;
+      transition: opacity 0.3s ease-in-out;
     }
-    pre.code-toolbar > .toolbar a:hover,
-    pre.code-toolbar > .toolbar a:focus,
-    pre.code-toolbar > .toolbar button:hover,
-    pre.code-toolbar > .toolbar button:focus,
-    pre.code-toolbar > .toolbar span:hover,
-    pre.code-toolbar > .toolbar span:focus {
+    .code-toolbar > .toolbar a:hover, .code-toolbar > .toolbar a:focus, .code-toolbar > .toolbar button:hover, .code-toolbar > .toolbar button:focus, .code-toolbar > .toolbar span:hover, .code-toolbar > .toolbar span:focus {
       color: #fff;
       background-color: #025aa5;
+      opacity: 1;
     }
 
 block content
   pre.line-numbers
     code(class='language-' + lang)
       | #{paste}
-  script(src='https://cdn.jsdelivr.net/prism/1.6.0/prism.js')
-  script(src='https://cdn.jsdelivr.net/prism/1.6.0/components/prism-' + lang + '.min.js')
-  script(src='https://cdn.jsdelivr.net/prism/1.6.0/plugins/toolbar/prism-toolbar.min.js')
-  script(src='https://cdn.jsdelivr.net/prism/1.6.0/plugins/line-numbers/prism-line-numbers.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js')
-  script(src='https://cdn.jsdelivr.net/prism/1.6.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/prism.js')
+  script(src='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/components/prism-' + lang + '.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/plugins/toolbar/prism-toolbar.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/plugins/line-numbers/prism-line-numbers.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/prismjs@1.15.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js')

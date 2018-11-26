@@ -19,7 +19,7 @@ module.exports = {
 				ctx.body = paste.paste;
 			}
 		} catch (ex) {
-			ctx.throw('Paste Not Found', 404);
+			ctx.throw(404, 'Paste Not Found');
 		}
 	},
 
