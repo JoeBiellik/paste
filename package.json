@@ -36,7 +36,7 @@
     "shortid": "^2.2.4"
   },
   "devDependencies": {
-    "eslint": "^5.9.0",
+    "eslint": "^6.0.0",
     "nodemon": "^1.18.6",
     "pug-lint": "^2.5.0"
   }
