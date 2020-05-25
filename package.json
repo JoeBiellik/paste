@@ -32,7 +32,7 @@
     "koa-static-cache": "^5.1.1",
     "koa-views": "^6.0.2",
     "mongoose": "^5.3.13",
-    "pug": "^2.0.0-rc.2",
+    "pug": "^3.0.0",
     "shortid": "^2.2.4"
   },
   "devDependencies": {
