@@ -5,18 +5,18 @@
 
 > Simple [Node.js](https://nodejs.org/) pastebin built with [Koa](https://koajs.com/), [MongoDB](https://www.mongodb.com/), [Jade](http://jade-lang.com/), [Bootstrap](https://getbootstrap.com/) and [Prism.js](https://prismjs.com/).
 
-Try it out at [paste.fyi](http://paste.fyi/)
+Try it out at [paste.fyi](https://paste.fyi/)
 
 ## Features
-* Clean code thanks to ES7 async/await and [Koa](https://koajs.com/)
 * Full syntax highlighting via [Prism.js](https://prismjs.com/)
+* Automatic and configurable paste expiry
+* Full support for CLI requests with [curl](https://curl.haxx.se/), [Wget](https://www.gnu.org/software/wget/) etc
 * <kbd>CTRL</kbd>+<kbd>Enter</kbd> hotkey for quick paste submission
 * Short URLs via [shortid](https://github.com/dylang/shortid), e.g. `NyQO9puMe`
-* Full support for CLI requests with [curl](https://curl.haxx.se/) etc
 * Textarea grows to fit content via [autosize.js](https://github.com/jackmoore/autosize)
-* Automatic and configurable paste expiry
-* Runs fully containerized with [Docker](https://www.docker.com/) and [Vagrant](https://www.vagrantup.com/)
 * Simple and responsive UI built with [Bootstrap](https://getbootstrap.com/)
+* Clean code thanks to ES7 async/await and [Koa](https://koajs.com/)
+* Runs fully containerized with [Docker](https://www.docker.com/)
 
 ## Usage
 ```sh
@@ -40,25 +40,14 @@ $ git diff README.md | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
   git clone https://github.com/JoeBiellik/paste.git && cd paste
   ```
 
-2. Start the virtual machine and connect:
+2. Install dependencies:
   ```sh
-  vagrant up
-  vagrant ssh
+  docker-compose run -e NODE_ENV=dev --rm --no-deps app npm install
   ```
 
-4. Install dependencies:
+3. Start app and watch for changes:
   ```sh
-  npm install
-  ```
-
-5. Start MongoDB:
-  ```sh
-  docker-compose up -d db
-  ```
-
-5. Start app and watch for changes:
-  ```sh
-  npm run watch
+  docker-compose run -e NODE_ENV=dev --rm --service-ports app npm run watch
   ```
 
 ## Deployment
