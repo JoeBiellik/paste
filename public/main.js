@@ -2,7 +2,11 @@
 /* global $ autosize */
 
 $(function() {
+	$.fn.selectpicker.Constructor.BootstrapVersion = '4';
+
 	autosize($('textarea'));
+
+	$('select#highlight').selectpicker();
 
 	$('textarea').on('keydown', function(e) {
 		if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey && $(this).val()) {
