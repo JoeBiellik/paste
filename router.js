@@ -4,6 +4,8 @@ const pastes = require('./controllers/pastes');
 
 router
 	.get('/', async (ctx) => {
+		ctx.set('Cache-Control', 'no-cache');
+
 		await ctx.render('index', {
 			pretty: config.prettyHtml,
 			title: config.name,
@@ -13,6 +15,6 @@ router
 		});
 	})
 	.post('/', pastes.create)
-	.get('/:id', pastes.view);
+	.get('/:id', require('koa-conditional-get')(), require('koa-etag')(), pastes.view);
 
 module.exports = router;

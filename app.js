@@ -3,7 +3,7 @@ const app = new koa();
 const config = require('config');
 const path = require('path');
 const router = require('./router');
-require('./db')();
+require('./db');
 
 app.keys = config.keys;
 app.proxy = true;
