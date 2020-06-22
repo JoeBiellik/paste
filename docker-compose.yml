@@ -1,24 +1,26 @@
-version: '2'
+version: "3"
+
 services:
   app:
-    container_name: app
     image: node:latest
     command: "npm start"
+    restart: unless-stopped
     working_dir: /app
-    links:
+    depends_on:
      - db
+    environment:
+      - NODE_ENV=production
+      - NODE_CONFIG_ENV=docker
     volumes:
-     - .:/app
+     - .:/app:Z
     ports:
      - "3000:80"
-    environment:
-     - NODE_ENV=docker
+
   db:
-    container_name: db
     image: mongo:latest
-    command: "--smallfiles"
+    restart: unless-stopped
     volumes:
-     - ./db:/data/db
+     - ./db:/data/db:Z
     expose:
      - 27017
     ports:
