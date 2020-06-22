@@ -32,9 +32,9 @@ $(function() {
 		var value = location.hash.slice(1);
 
 		if (value && $('select#highlight option[value=' + value + ']').length) {
-			$('select#highlight').val(value);
+			$('select#highlight').selectpicker('val', value);
 		} else {
-			$('select#highlight').val('');
+			$('select#highlight').selectpicker('val', '');
 		}
 	});
 
