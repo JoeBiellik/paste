@@ -1,10 +1,14 @@
 {
   "name": "Paste",
-  "port": 3000,
+  "host": "0.0.0.0",
+  "port": 80,
   "db": "mongodb://localhost/paste",
+  "keys": [
+    "random key here"
+  ],
+  "prettyHtml": true,
   "cacheAge": 86400,
   "sizeLimit": "2mb",
-  "prettyHtml": true,
   "expiresDefault": 604800,
   "expires": {
     "600": "10 minutes",
