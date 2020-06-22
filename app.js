@@ -1,6 +1,7 @@
 const koa = require('koa');
 const app = new koa();
 const config = require('config');
+const path = require('path');
 const router = require('./router');
 require('./db')();
 
@@ -9,7 +10,7 @@ app.proxy = true;
 
 app.use(require('koa-logger')());
 app.use(require('koa-compress')());
-app.use(require('koa-static-cache')('./public', {
+app.use(require('koa-static-cache')(path.join(__dirname, 'public'), {
 	maxAge: config.cacheAge
 }));
 app.use(require('koa-body')({
@@ -18,7 +19,7 @@ app.use(require('koa-body')({
 	formLimit: config.sizeLimit,
 	textLimit: config.sizeLimit
 }));
-app.use(require('koa-views')(__dirname + '/views', {
+app.use(require('koa-views')(path.join(__dirname, 'views'), {
 	extension: 'pug'
 }));
 
