@@ -13,31 +13,32 @@
   "keywords": [
     "pastebin",
     "paste",
-    "node",
     "koa",
     "mongodb"
   ],
   "main": "server.js",
   "scripts": {
-    "watch": "nodemon -L -e js,json",
+    "watch": "nodemon -L -e js,json,pug -i ./public",
     "lint": "eslint . && pug-lint ./views"
   },
   "dependencies": {
-    "config": "^3.0.0",
-    "koa": "^2.3.0",
-    "koa-body": "^4.0.4",
-    "koa-compress": "^3.0.0",
-    "koa-logger": "^3.0.1",
-    "koa-router": "^7.2.1",
-    "koa-static-cache": "^5.1.1",
-    "koa-views": "^6.0.2",
-    "mongoose": "^5.3.13",
-    "pug": "^2.0.0-rc.2",
-    "shortid": "^2.2.4"
+    "config": "^3.3.1",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-compress": "^4.0.1",
+    "koa-conditional-get": "^2.0.0",
+    "koa-etag": "^3.0.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^9.0.1",
+    "koa-static-cache": "^5.1.3",
+    "koa-views": "^6.3.0",
+    "mongoose": "^5.9.19",
+    "pug": "^3.0.0",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
-    "eslint": "^5.9.0",
-    "nodemon": "^1.18.6",
-    "pug-lint": "^2.5.0"
+    "eslint": "^7.3.0",
+    "nodemon": "^2.0.4",
+    "pug-lint": "^2.6.0"
   }
 }
