@@ -1,11 +1,12 @@
 const config = require('config');
+const fs = require('fs').promises;
 const Paste = require('../models/paste');
 
 module.exports = {
 	async view(ctx) {
 		try {
-			let paste = await Paste.findById(ctx.params.id).exec();
-			let lang = (Object.keys(ctx.query)[0] || '').toLowerCase();
+			const paste = await Paste.findById(ctx.params.id).exec();
+			const lang = (Object.keys(ctx.query)[0] || '').toLowerCase();
 
 			ctx.set('Cache-Control', 'public');
 			ctx.set('Expires', paste.expiresAt.toUTCString());
@@ -18,7 +19,6 @@ module.exports = {
 					lang: Object.keys(config.highlights).includes(lang) ? lang : 'unknown'
 				});
 			} else {
-				ctx.type = 'text/plain';
 				ctx.body = paste.paste;
 			}
 		} catch (ex) {
@@ -33,39 +33,106 @@ module.exports = {
 	async create(ctx) {
 		ctx.set('Cache-Control', 'no-cache');
 
-		if (ctx.request.body.fields) {
-			if (ctx.request.body.fields.paste) {
-				ctx.request.body.paste = ctx.request.body.fields.paste;
-			}
-			if (ctx.request.body.fields.highlight) {
-				ctx.request.body.highlight = ctx.request.body.fields.highlight.toLowerCase();
-			}
-			if (ctx.request.body.fields.expire) {
-				ctx.request.body.expire = ctx.request.body.fields.expire;
+		// Request body
+		if (!ctx.request.body.paste && ctx.request.files) {
+			try {
+				// Request body, xxx
+				let path = Object.values(ctx.request.files)[0].path;
+
+				// Request body, paste=xxx
+				if (ctx.request.files.paste) {
+					path = ctx.request.files.paste.path;
+				}
+
+				ctx.request.body.paste = await fs.readFile(path);
+
+				try {
+					await fs.unlink(path);
+				} catch (ex) {
+					// Ignore
+				}
+			} catch (ex) {
+				ctx.throw(400, 'Error Processing Request Body', {
+					headers: {
+						'Cache-Control': 'no-cache'
+					}
+				});
 			}
 		}
 
+		// Expiry multiplier
+		try {
+			if (ctx.request.body.expire && ctx.request.body.multiplier) {
+				ctx.request.body.expire = ctx.request.body.expire * ctx.request.body.multiplier;
+			}
+		} catch (ex) {
+			ctx.throw(400, 'Error Processing Paste Expiry', {
+				headers: {
+					'Cache-Control': 'no-cache'
+				}
+			});
+		}
+
+		// Raw request body
+		if (typeof ctx.request.body === 'string') {
+			ctx.request.body = {
+				paste: ctx.request.body
+			};
+		}
+
+		if (!ctx.request.body.paste) {
+			ctx.throw(400, 'Error No Paste Provided', {
+				headers: {
+					'Cache-Control': 'no-cache'
+				}
+			});
+		}
+
+		// /?expire=xxx
+		if (!ctx.request.body.expire && ctx.query.expire) {
+			ctx.request.body.expire = ctx.query.expire;
+		}
+
+		// No expire provided
 		if (!ctx.request.body.expire) {
-			ctx.request.body.expire = config.expiresDefault;
+			ctx.request.body.expire = config.expires.default.value * config.expires.default.multiplier;
 		}
 
-		let paste = new Paste({
+		const paste = new Paste({
 			paste: ctx.request.body.paste,
 			expiresAt: new Date(Date.now() + ctx.request.body.expire * 1000)
 		});
 
-		await paste.save();
+		try {
+			await paste.save();
+		} catch (ex) {
+			ctx.throw(500, 'Error Storing Paste', {
+				headers: {
+					'Cache-Control': 'no-cache'
+				}
+			});
+		}
 
-		let link = paste.id;
+		// /?highlight=xxx
+		if (!ctx.request.body.highlight && ctx.query.highlight) {
+			ctx.request.body.highlight = ctx.query.highlight;
+		}
 
-		if (ctx.request.body.highlight && ctx.request.body.highlight != 'plain' && Object.keys(config.highlights).includes(ctx.request.body.highlight)) {
-			link += '?' + ctx.request.body.highlight;
+		// /?xxx
+		if (!ctx.request.body.highlight && !ctx.query.highlight && ctx.query) {
+			ctx.request.body.highlight = Object.keys(ctx.query).filter(k => k != 'redirect' && k != 'expire')[0];
+		}
+
+		let highlight = '';
+
+		if (ctx.request.body.highlight && Object.keys(config.highlights).includes(ctx.request.body.highlight)) {
+			highlight = '?' + ctx.request.body.highlight;
 		}
 
 		if (Object.keys(ctx.query).includes('redirect')) {
-			ctx.redirect(link);
+			ctx.redirect(ctx.request.origin + '/' + paste.id + highlight);
 		} else {
-			ctx.body = ctx.request.origin + '/' + link + '\n';
+			ctx.body = ctx.request.origin + '/' + paste.id + highlight + '\n';
 		}
 	}
 };

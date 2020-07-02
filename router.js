@@ -13,6 +13,7 @@ router
 			title: config.name,
 			url: ctx.request.origin,
 			expires: config.expires,
+			expiresDefault: config.expiresDefault,
 			highlights: config.highlights
 		});
 	})

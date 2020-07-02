@@ -1,10 +1,9 @@
 extends layout
 
 block head
-  link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:400,300')
-  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css', integrity='sha256-VcuSs+n31yebPlEcehu6PvnidJ808ScFBsK8+tJKX+Q=', crossorigin='anonymous')
-  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/toolbar/prism-toolbar.min.css', integrity='sha256-P45OhhEWm49G8sadt2n5rDaWLa3xZbDOQhJliuaojH0=', crossorigin='anonymous')
-  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/line-numbers/prism-line-numbers.min.css', integrity='sha256-Afz2ZJtXw+OuaPX10lZHY7fN1+FuTE/KdCs+j7WZTGc=', crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css' integrity='sha256-VcuSs+n31yebPlEcehu6PvnidJ808ScFBsK8+tJKX+Q=' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/toolbar/prism-toolbar.min.css' integrity='sha256-P45OhhEWm49G8sadt2n5rDaWLa3xZbDOQhJliuaojH0=' crossorigin='anonymous')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/line-numbers/prism-line-numbers.min.css' integrity='sha256-Afz2ZJtXw+OuaPX10lZHY7fN1+FuTE/KdCs+j7WZTGc=' crossorigin='anonymous')
 
   style.
     html, body, .code-toolbar, pre, code {
@@ -18,10 +17,6 @@ block head
     }
     pre[class*="language-"] > code {
       border-left: none;
-    }
-    .line-numbers-rows {
-      -webkit-user-select: none;
-      user-select: none;
     }
     div.code-toolbar > .toolbar {
       top: 1rem;
@@ -44,7 +39,7 @@ block head
       display: inline-block;
       font-weight: 400;
       transition: color 0.15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-      font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       border: 1px solid transparent;
     }
     div.code-toolbar > .toolbar a:focus, div.code-toolbar > .toolbar a:hover, div.code-toolbar > .toolbar button:focus, div.code-toolbar > .toolbar button:hover, div.code-toolbar > .toolbar span:focus, div.code-toolbar > .toolbar span:hover {
@@ -58,9 +53,9 @@ block content
     code(class='language-' + lang)
       | #{paste}
 
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js', integrity='sha256-3teItwIfMuVB74Alnxw/y5HAZ2irOsCULFff3EgbtEs=', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js' integrity='sha256-3teItwIfMuVB74Alnxw/y5HAZ2irOsCULFff3EgbtEs=' crossorigin='anonymous')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-' + lang + '.min.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/toolbar/prism-toolbar.min.js', integrity='sha256-7I/IdbPM17QdjqRNwpVYj4iDGAQw7ZFHy9RSSU1yvLE=', crossorigin='anonymous')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/line-numbers/prism-line-numbers.min.js', integrity='sha256-hep5s8952MqR7Y79JYfCXZD6vQjVHs7sOu/ZGrs1OEQ=', crossorigin='anonymous')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js', integrity='sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=', crossorigin='anonymous')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js', integrity='sha256-5F8rynXScCOEtnwlm5P293TlCvTT1beoEJcmWHCg4BU=', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/toolbar/prism-toolbar.min.js' integrity='sha256-7I/IdbPM17QdjqRNwpVYj4iDGAQw7ZFHy9RSSU1yvLE=' crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/line-numbers/prism-line-numbers.min.js' integrity='sha256-hep5s8952MqR7Y79JYfCXZD6vQjVHs7sOu/ZGrs1OEQ=' crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js' integrity='sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=' crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js' integrity='sha256-5F8rynXScCOEtnwlm5P293TlCvTT1beoEJcmWHCg4BU=' crossorigin='anonymous')

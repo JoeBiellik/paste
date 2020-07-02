@@ -2,11 +2,24 @@
 /* global $ autosize */
 
 $(function() {
+	if (localStorage.getItem('expire-value') != null) $('input#expire').val(localStorage.getItem('expire-value'));
+	if (localStorage.getItem('expire-multiplier') != null) $('#multiplier').val(localStorage.getItem('expire-multiplier'));
+
 	$.fn.selectpicker.Constructor.BootstrapVersion = '4';
 
 	autosize($('textarea'));
 
+	$('select#highlight').removeClass('custom-select');
+	$('input#expire').removeClass('mr-3');
+
 	$('select#highlight').selectpicker();
+
+	$('input#expire').TouchSpin({
+		min: 1,
+		max: 999,
+		buttondown_class: 'btn text-dark border-gray',
+		buttonup_class: 'btn text-dark border-gray'
+	});
 
 	$('textarea').on('keydown', function(e) {
 		if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey && $(this).val()) {
@@ -14,18 +27,38 @@ $(function() {
 		}
 	});
 
-	$('pre').on('click', function() {
-		var range = document.createRange();
+	$('input#expire').on('change', function(e) {
+		var value = $(e.target).val();
 
-		range.setStart(this.firstChild, 19);
-		range.setEnd(this.firstChild, this.firstChild.textContent.length);
+		$('#multiplier option').text(function(_, t) {
+			var plural = t.substring(t.length - 1) == 's';
 
-		window.getSelection().removeAllRanges();
-		window.getSelection().addRange(range);
+			if (value > 1) {
+				if (!plural) {
+					return t + 's';
+				}
+			} else {
+				if (plural) {
+					return t.slice(0, -1);
+				}
+			}
+
+			return t;
+		});
+
+		localStorage.setItem('expire-value', value);
+	});
+
+	$('#multiplier').on('change', function(e) {
+		localStorage.setItem('expire-multiplier', $(e.target).val());
 	});
 
 	$('select#highlight').on('change', function() {
-		location.hash = $(this).val();
+		if ($(this).val() == '') {
+			history.pushState({}, '', '/');
+		} else {
+			location.hash = $(this).val();
+		}
 	});
 
 	$(window).on('hashchange', function() {
@@ -39,4 +72,5 @@ $(function() {
 	});
 
 	$(window).trigger('hashchange');
+	$('input#expire').trigger('change');
 });
