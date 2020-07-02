@@ -18,20 +18,37 @@ Try it out at [paste.fyi](https://paste.fyi/)
 * Clean code thanks to ES7 async/await and [Koa](https://koajs.com/)
 * Runs fully containerized with [Docker](https://www.docker.com/)
 
-## Usage
+## CLI Usage
 ```sh
 # Simple paste
-$ echo 'Hello World' | curl -F 'paste=<-' http://paste.fyi
+$ echo 'Hello World' | curl -F 'paste=<-' paste.fyi
 http://paste.fyi/N15FNVqfg
 
-# wget or any other tool is fine too:
-$ wget --post-data 'paste=Hello from wget' -qO- http://paste.fyi
+# Either form or multipart data is accepted
+$ curl -F 'paste=Sent as form data' https://paste.fyi
+$ curl -d 'paste=Sent as multipart data' https://paste.fyi
 
-# Either form or multipart data is accepted:
-$ curl -d 'paste=Sent as multipart' http://paste.fyi
+# Wget or any other tool is fine too
+$ wget --post-data 'paste=Hello from Wget' -qO- https://paste.fyi
 
-# Specify the syntax to highlight:
-$ git diff README.md | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
+# Upload a file
+$ curl -F 'paste=@path/to/file.txt' https://paste.fyi
+
+# Specify the expiry time in seconds
+$ curl -F 'paste=2 minutes' -F 'expire=120' https://paste.fyi
+$ curl -F 'paste=2 minutes' https://paste.fyi/?expire=120
+
+# Specify the syntax to highlight
+$ git diff README.md | curl -F 'paste=<-' https://paste.fyi/?diff
+$ curl -F 'paste=@path/to/file.diff' -F 'highlight=diff' https://paste.fyi
+
+# Redirect to content
+$ curl -F 'paste=My paste' https://paste.fyi/?redirect
+My paste
+
+# Combined options
+$ curl -F 'paste=My paste' -F 'expire=60' -F 'highlight=shell' https://paste.fyi
+$ curl -F 'paste=My paste' 'https://paste.fyi/?expire=120&shell'
 ```
 
 ## Development
@@ -42,12 +59,12 @@ $ git diff README.md | curl -F 'paste=<-' -F 'highlight=diff' http://paste.fyi
 
 2. Install dependencies:
   ```sh
-  docker-compose run -e NODE_ENV=dev --rm --no-deps app npm install
+  docker-compose run -e NODE_ENV= --rm --no-deps app npm install
   ```
 
 3. Start app and watch for changes:
   ```sh
-  docker-compose run -e NODE_ENV=dev --rm --service-ports app npm run watch
+  docker-compose run -e NODE_ENV= --rm --service-ports app npm run watch
   ```
 
 ## Deployment
