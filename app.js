@@ -8,7 +8,14 @@ require('./db');
 app.keys = config.keys;
 app.proxy = true;
 
-app.use(require('koa-logger')());
+if (process.env.NODE_ENV == 'production') {
+	app.on('error', (err, ctx) => {
+		console.error(ctx.request.method, ctx.request.url, err.status, err.message);
+	});
+} else {
+	app.use(require('koa-logger')());
+}
+
 app.use(require('koa-compress')());
 app.use(require('koa-static-cache')(path.join(__dirname, 'public'), {
 	maxAge: config.cacheAge
@@ -23,7 +30,6 @@ app.use(require('koa-body')({
 app.use(require('koa-views')(path.join(__dirname, 'views'), {
 	extension: 'pug'
 }));
-
 app.use(router.routes(), router.allowedMethods());
 
 module.exports = app;
