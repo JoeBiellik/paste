@@ -14,6 +14,7 @@ app.use(require('koa-static-cache')(path.join(__dirname, 'public'), {
 	maxAge: config.cacheAge
 }));
 app.use(require('koa-body')({
+	json: false,
 	multipart: true,
 	jsonLimit: config.sizeLimit,
 	formLimit: config.sizeLimit,
