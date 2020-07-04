@@ -62,15 +62,19 @@ $ curl -F 'paste=My paste' 'https://paste.fyi/?expire=120&shell'
   docker-compose run -e NODE_ENV= --rm --no-deps app npm install
   ```
 
-3. Start app and watch for changes:
+3. Start the app and watch for changes:
   ```sh
   docker-compose run -e NODE_ENV= --rm --service-ports app npm run watch
   ```
 
 ## Deployment
-1. Configure `config/docker.json` with any custom settings
+1. Follow the first two development steps.
 
-2. Start the production database and Node.js server:
+2. Configure `config/docker.json` with any custom setting overrides
+
+3. Configure `docker-compose.yml` with Docker options and ports to use
+
+4. Start the production database and Node.js server:
   ```sh
   docker-compose up
   ```
