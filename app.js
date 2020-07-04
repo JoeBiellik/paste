@@ -30,6 +30,7 @@ app.use(require('koa-body')({
 app.use(require('koa-views')(path.join(__dirname, 'views'), {
 	extension: 'pug'
 }));
+
 app.use(router.routes(), router.allowedMethods());
 
 module.exports = app;
