@@ -3,7 +3,7 @@
 [![Release Version](https://img.shields.io/github/release/JoeBiellik/paste.svg)](https://github.com/JoeBiellik/paste/releases)
 [![Dependencies](https://img.shields.io/david/JoeBiellik/paste.svg)](https://david-dm.org/JoeBiellik/paste)
 
-> Simple [Node.js](https://nodejs.org/) pastebin built with [Koa](https://koajs.com/), [MongoDB](https://www.mongodb.com/), [Jade](http://jade-lang.com/), [Bootstrap](https://getbootstrap.com/) and [Prism.js](https://prismjs.com/).
+> Simple [Node.js](https://nodejs.org/) pastebin built with [Koa](https://koajs.com/), [MongoDB](https://www.mongodb.com/), [Pug](https://pugjs.org/), [Bootstrap](https://getbootstrap.com/) and [Prism.js](https://prismjs.com/).
 
 Try it out at [paste.fyi](https://paste.fyi/)
 
@@ -14,8 +14,6 @@ Try it out at [paste.fyi](https://paste.fyi/)
 * <kbd>CTRL</kbd>+<kbd>Enter</kbd> hotkey for quick paste submission
 * Short URLs via [shortid](https://github.com/dylang/shortid), e.g. `NyQO9puMe`
 * Textarea grows to fit content via [autosize.js](https://github.com/jackmoore/autosize)
-* Simple and responsive UI built with [Bootstrap](https://getbootstrap.com/)
-* Clean code thanks to ES7 async/await and [Koa](https://koajs.com/)
 * Runs fully containerized with [Docker](https://www.docker.com/)
 
 ## CLI Usage
