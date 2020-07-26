@@ -32,12 +32,12 @@
     "koa-router": "^9.1.0",
     "koa-static-cache": "^5.1.3",
     "koa-views": "^6.3.0",
-    "mongoose": "^5.9.22",
+    "mongoose": "^5.9.25",
     "pug": "^3.0.0",
     "shortid": "^2.2.15"
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "nodemon": "^2.0.4",
     "pug-lint": "^2.6.0"
   }
