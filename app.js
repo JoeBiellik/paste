@@ -9,9 +9,7 @@ app.keys = config.keys;
 app.proxy = true;
 
 if (process.env.NODE_ENV == 'production') {
-	app.on('error', (err, ctx) => {
-		console.error(ctx.request.method, ctx.request.url, err.status, err.message);
-	});
+	app.on('error', (err, ctx) => console.error(ctx.request.ip, ctx.request.method, ctx.request.url, err.status, err.message));
 } else {
 	app.use(require('koa-logger')());
 }
