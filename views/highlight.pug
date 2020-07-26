@@ -50,8 +50,7 @@ block head
 
 block content
   pre.line-numbers
-    code(class='language-' + lang)
-      | #{paste}
+    code(class='language-' + lang)= paste
 
   script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js' integrity='sha256-3teItwIfMuVB74Alnxw/y5HAZ2irOsCULFff3EgbtEs=' crossorigin='anonymous')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-' + lang + '.min.js')

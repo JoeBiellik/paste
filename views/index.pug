@@ -88,26 +88,26 @@ block content
     img(src='https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png' alt='Fork me on GitHub')
 
   main.container.py-3.pt-sm-5.pb-md-5
-    h1.display-3 #{title}
+    h1.display-3= title
 
     form(action='/?redirect' method='POST' accept-charset='UTF-8')
-      label.sr-only(for="paste") Paste content
+      label.sr-only(for='paste') Paste content
       textarea#paste.my-3.my-sm-5.form-control(name='paste' rows='10' required autofocus)
 
       .row
         .col-12.col-md-9.mb-3.mb-sm-4.clearfix
-          label.d-block.float-sm-left(for="highlight") Highlight
-          select#highlight.custom-select.float-sm-left(name='highlight' data-live-search='true' data-style='text-dark border-gray' data-styleBase='custom-select')
+          label.d-block.float-sm-left(for='highlight') Highlight
+          select#highlight.custom-select.float-sm-left(name='highlight' data-live-search='true' data-style='text-dark border-gray' data-stylebase='custom-select')
             each val, key in highlights
-              option(value=key data-tokens=(val.alias || []).join(' ') || false) #{val.name}
+              option(value=key data-tokens=(val.alias || []).join(' ') || false)= val.name
 
         .col-md-9.col-sm-12.mb-3.clearfix
-          label.d-block.float-sm-left(for="expire") Expiry
+          label.d-block.float-sm-left(for='expire') Expiry
           input#expire.mr-3.form-control.text-center.float-sm-left(name='expire' type='text' value=expires.default.value required)
-          label.sr-only(for="multiplier") Expiry multiplier
+          label.sr-only(for='multiplier') Expiry multiplier
           select#multiplier.custom-select.float-sm-left(name='multiplier' required)
             each val, key in expires.multipliers
-              option(value=key selected=key == expires.default.multiplier) #{val}
+              option(value=key selected=key == expires.default.multiplier)= val
 
         .col-12.col-md-3.mb-3.text-md-right
           button.btn.btn-primary.btn-lg(type='submit') Upload
