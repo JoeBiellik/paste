@@ -1,5 +1,6 @@
 const config = require('config');
 const fs = require('fs').promises;
+const isBinaryFile = require('isbinaryfile').isBinaryFile;
 const Paste = require('../models/paste');
 
 module.exports = {
@@ -40,7 +41,12 @@ module.exports = {
 					path = ctx.request.files.paste.path;
 				}
 
-				ctx.request.body.paste = await fs.readFile(path);
+				const data = await fs.readFile(path);
+				const stat = await fs.lstat(path);
+
+				if (isBinaryFile(data, stat.size)) ctx.throw();
+
+				ctx.request.body.paste = data;
 
 				try {
 					await fs.unlink(path);
