@@ -22,8 +22,14 @@ app.use(require('koa-views')(path.join(__dirname, 'views'), {
 	extension: 'pug'
 }));
 
-app.use(router.routes(), router.allowedMethods());
+app.use(router.routes());
 
-app.use((ctx) => ctx.throw(404));
+app.use(async (ctx, next) => {
+	await next();
+
+	if (!ctx.status || ctx.status == 404) ctx.throw(404);
+});
+
+app.use(router.allowedMethods());
 
 module.exports = app;
