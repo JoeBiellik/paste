@@ -22,9 +22,10 @@ Try it out at [paste.fyi](https://paste.fyi/)
 $ echo 'Hello World' | curl -F 'paste=<-' paste.fyi
 http://paste.fyi/N15FNVqfg
 
-# Either form or multipart data is accepted
+# Either form, multipart or raw text data is accepted
 $ curl -F 'paste=Sent as form data' https://paste.fyi
 $ curl -d 'paste=Sent as multipart data' https://paste.fyi
+$ curl -H "Content-Type: text/plain" -d 'Sent as raw text' https://paste.fyi
 
 # Wget or any other tool is fine too
 $ wget --post-data 'paste=Hello from Wget' -qO- https://paste.fyi
