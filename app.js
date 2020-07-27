@@ -18,17 +18,12 @@ app.use(require('koa-compress')());
 app.use(require('koa-static-cache')(path.join(__dirname, 'public'), {
 	maxAge: config.cacheAge
 }));
-app.use(require('koa-body')({
-	json: false,
-	multipart: true,
-	jsonLimit: config.sizeLimit,
-	formLimit: config.sizeLimit,
-	textLimit: config.sizeLimit
-}));
 app.use(require('koa-views')(path.join(__dirname, 'views'), {
 	extension: 'pug'
 }));
 
 app.use(router.routes(), router.allowedMethods());
+
+app.use((ctx) => ctx.throw(404));
 
 module.exports = app;

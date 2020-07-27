@@ -22,11 +22,7 @@ module.exports = {
 				ctx.body = paste.paste;
 			}
 		} catch (ex) {
-			ctx.throw(404, 'Paste Not Found', {
-				headers: {
-					'Cache-Control': 'no-cache'
-				}
-			});
+			ctx.throw(404, 'Paste Not Found');
 		}
 	},
 
@@ -52,11 +48,7 @@ module.exports = {
 					// Ignore
 				}
 			} catch (ex) {
-				ctx.throw(400, 'Error Processing Request Body', {
-					headers: {
-						'Cache-Control': 'no-cache'
-					}
-				});
+				ctx.throw(400, 'Bad Paste Body');
 			}
 		}
 
@@ -66,11 +58,7 @@ module.exports = {
 				ctx.request.body.expire = ctx.request.body.expire * ctx.request.body.multiplier;
 			}
 		} catch (ex) {
-			ctx.throw(400, 'Error Processing Paste Expiry', {
-				headers: {
-					'Cache-Control': 'no-cache'
-				}
-			});
+			ctx.throw(400, 'Bad Paste Expiry');
 		}
 
 		// Raw request body
@@ -81,11 +69,7 @@ module.exports = {
 		}
 
 		if (!ctx.request.body.paste) {
-			ctx.throw(400, 'Error No Paste Provided', {
-				headers: {
-					'Cache-Control': 'no-cache'
-				}
-			});
+			ctx.throw(400, 'No Paste Provided');
 		}
 
 		// /?expire=xxx
@@ -106,11 +90,7 @@ module.exports = {
 		try {
 			await paste.save();
 		} catch (ex) {
-			ctx.throw(500, 'Error Storing Paste', {
-				headers: {
-					'Cache-Control': 'no-cache'
-				}
-			});
+			ctx.throw(500, 'Internal Storage Error');
 		}
 
 		// /?highlight=xxx
