@@ -12,7 +12,7 @@ Try it out at [paste.fyi](https://paste.fyi/)
 * Automatic and configurable paste expiry
 * Full support for CLI requests with [curl](https://curl.haxx.se/), [Wget](https://www.gnu.org/software/wget/) etc
 * <kbd>CTRL</kbd>+<kbd>Enter</kbd> hotkey for quick paste submission
-* Short URLs via [shortid](https://github.com/dylang/shortid), e.g. `NyQO9puMe`
+* Short and readable URLs via [nanoid](https://github.com/ai/nanoid), e.g. `/qNGDwRyx`
 * Textarea grows to fit content via [autosize.js](https://github.com/jackmoore/autosize)
 * Runs fully containerized with [Docker](https://www.docker.com/)
 
@@ -20,7 +20,7 @@ Try it out at [paste.fyi](https://paste.fyi/)
 ```sh
 # Simple paste
 $ echo 'Hello World' | curl -F 'paste=<-' paste.fyi
-http://paste.fyi/N15FNVqfg
+http://paste.fyi/qNGDwRyx
 
 # Either form, multipart or raw text data is accepted
 $ curl -F 'paste=Sent as form data' https://paste.fyi
