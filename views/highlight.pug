@@ -4,49 +4,7 @@ block head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css' integrity='sha256-VcuSs+n31yebPlEcehu6PvnidJ808ScFBsK8+tJKX+Q=' crossorigin='anonymous')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/toolbar/prism-toolbar.min.css' integrity='sha256-P45OhhEWm49G8sadt2n5rDaWLa3xZbDOQhJliuaojH0=' crossorigin='anonymous')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/line-numbers/prism-line-numbers.min.css' integrity='sha256-Afz2ZJtXw+OuaPX10lZHY7fN1+FuTE/KdCs+j7WZTGc=' crossorigin='anonymous')
-
-  style.
-    html, body, .code-toolbar, pre, code {
-      height: 100%;
-    }
-    pre[class*="language-"] {
-      margin: 0;
-    }
-    pre[class*="language-"]::before, pre[class*="language-"]::after {
-      display: none;
-    }
-    pre[class*="language-"] > code {
-      border-left: none;
-    }
-    div.code-toolbar > .toolbar {
-      top: 1rem;
-      right: 2.5rem;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      transition: none;
-      opacity: 1;
-    }
-    div.code-toolbar > .toolbar a, div.code-toolbar > .toolbar button, div.code-toolbar > .toolbar span {
-      padding: 0.5rem 1rem;
-      font-size: 1.25rem;
-      line-height: 1.5;
-      border-radius: 0.3rem;
-      color: #fff;
-      background-color: #007bff;
-      border-color: #007bff;
-      display: inline-block;
-      font-weight: 400;
-      transition: color 0.15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-      font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      border: 1px solid transparent;
-    }
-    div.code-toolbar > .toolbar a:focus, div.code-toolbar > .toolbar a:hover, div.code-toolbar > .toolbar button:focus, div.code-toolbar > .toolbar button:hover, div.code-toolbar > .toolbar span:focus, div.code-toolbar > .toolbar span:hover {
-      color: #fff;
-      background-color: #0069d9;
-      border-color: #0062cc;
-    }
+  link(rel='stylesheet' href='/highlight.css')
 
 block content
   pre.line-numbers
