@@ -107,8 +107,8 @@ module.exports = {
 
 		try {
 			await paste.save();
-		} catch (ex) {
-			ctx.throw(500, 'Internal Storage Error');
+		} catch (err) {
+			ctx.throw(500, err.message);
 		}
 
 		// /?highlight=xxx
