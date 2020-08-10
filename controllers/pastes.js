@@ -118,7 +118,7 @@ module.exports = {
 
 		// /?xxx
 		if (!ctx.request.body.highlight && !ctx.query.highlight && ctx.query) {
-			ctx.request.body.highlight = Object.keys(ctx.query).filter((k) => k !== 'redirect' && k !== 'expire')[0];
+			ctx.request.body.highlight = Object.keys(ctx.query).find((k) => k !== 'redirect' && k !== 'expire');
 		}
 
 		let highlight = '';
