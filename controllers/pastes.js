@@ -19,8 +19,8 @@ module.exports = {
 			const paste = await Paste.findById(ctx.params.id).exec();
 			const lang = (Object.keys(ctx.query)[0] || '').toLowerCase();
 
-			ctx.set('Cache-Control', 'public');
 			ctx.set('Expires', paste.expiresAt.toUTCString());
+			ctx.set('Last-Modified', paste.updatedAt.toUTCString());
 
 			if (lang) {
 				await ctx.render('highlight', {
