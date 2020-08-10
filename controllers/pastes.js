@@ -32,11 +32,12 @@ module.exports = {
 			} else {
 				ctx.body = paste.paste;
 			}
-		} catch (ex) {
+		} catch {
 			ctx.throw(404, 'Paste Not Found');
 		}
 	},
 
+	/* eslint-disable-next-line complexity */
 	async create(ctx) {
 		ctx.set('Cache-Control', 'no-cache');
 
@@ -60,10 +61,10 @@ module.exports = {
 
 				try {
 					await fs.unlink(path);
-				} catch (ex) {
+				} catch {
 					// Ignore
 				}
-			} catch (ex) {
+			} catch {
 				ctx.throw(400, 'Bad Paste Body');
 			}
 		}
@@ -71,9 +72,9 @@ module.exports = {
 		// Expiry multiplier
 		try {
 			if (ctx.request.body.expire && ctx.request.body.multiplier) {
-				ctx.request.body.expire = ctx.request.body.expire * ctx.request.body.multiplier;
+				ctx.request.body.expire *= ctx.request.body.multiplier;
 			}
-		} catch (ex) {
+		} catch {
 			ctx.throw(400, 'Bad Paste Expiry');
 		}
 
@@ -100,7 +101,7 @@ module.exports = {
 
 		const paste = new Paste({
 			paste: ctx.request.body.paste,
-			expiresAt: new Date(Date.now() + ctx.request.body.expire * 1000)
+			expiresAt: new Date(Date.now() + (ctx.request.body.expire * 1000))
 		});
 
 		try {
@@ -116,7 +117,7 @@ module.exports = {
 
 		// /?xxx
 		if (!ctx.request.body.highlight && !ctx.query.highlight && ctx.query) {
-			ctx.request.body.highlight = Object.keys(ctx.query).filter(k => k != 'redirect' && k != 'expire')[0];
+			ctx.request.body.highlight = Object.keys(ctx.query).filter((k) => k !== 'redirect' && k !== 'expire')[0];
 		}
 
 		let highlight = '';

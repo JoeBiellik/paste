@@ -3,11 +3,11 @@
 const https = require('https');
 
 // Match version number to included copy
-https.get('https://raw.githubusercontent.com/PrismJS/prism/v1.20.0/components.json', res => {
+https.get('https://raw.githubusercontent.com/PrismJS/prism/v1.20.0/components.json', (res) => {
 	res.setEncoding('utf8');
 
 	let body = '';
-	res.on('data', data => {
+	res.on('data', (data) => {
 		body += data;
 	});
 
@@ -17,15 +17,17 @@ https.get('https://raw.githubusercontent.com/PrismJS/prism/v1.20.0/components.js
 		const highlights = {};
 
 		// Split markup
-		for (let id in components.languages.markup.aliasTitles) {
+		for (const id in components.languages.markup.aliasTitles) {
+			if (!Object.prototype.hasOwnProperty.call(components.languages.markup.aliasTitles, id)) continue;
+
 			components.languages[id] = {
 				title: components.languages.markup.aliasTitles[id]
 			};
 		}
 
-		for (let id in components.languages) {
-			if (id == 'meta') continue;
-			if (id == 'markup') continue;
+		for (const id in components.languages) {
+			if (id === 'meta') continue;
+			if (id === 'markup') continue;
 
 			const lang = components.languages[id];
 			const name = lang.title || lang;
@@ -41,10 +43,10 @@ https.get('https://raw.githubusercontent.com/PrismJS/prism/v1.20.0/components.js
 			}
 
 			highlights[id] = {
-				name: name
+				name
 			};
 
-			if (contents.length) {
+			if (contents.length > 0) {
 				highlights[id].alias = contents;
 			}
 		}
@@ -68,8 +70,6 @@ https.get('https://raw.githubusercontent.com/PrismJS/prism/v1.20.0/components.js
 		highlights.json.alias = ['javascript object notation'];
 		highlights.json5.alias = ['javascript object notation'];
 		highlights.jsonp.alias = ['javascript object notation'];
-		// highlights.jsstacktrace.name = 'JavaScript stack trace';
-		// highlights.jsstacktrace.alias.push('javascript'];
 		highlights.nasm.alias = ['assembly'];
 		highlights.protobuf.alias = ['protobuf'];
 		highlights.pug.alias = ['jade'];
@@ -83,7 +83,7 @@ https.get('https://raw.githubusercontent.com/PrismJS/prism/v1.20.0/components.js
 
 		// Sort
 		const ordered = {};
-		Object.keys(highlights).sort().forEach(function(key) {
+		Object.keys(highlights).sort().forEach((key) => {
 			ordered[key] = highlights[key];
 		});
 

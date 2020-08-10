@@ -1,9 +1,6 @@
-/* eslint-env browser */
-/* global $ autosize */
-
-$(function() {
-	if (localStorage.getItem('expire-value') != null) $('input#expire').val(localStorage.getItem('expire-value'));
-	if (localStorage.getItem('expire-multiplier') != null) $('#multiplier').val(localStorage.getItem('expire-multiplier'));
+$(() => {
+	if (localStorage.getItem('expire-value') !== null) $('input#expire').val(localStorage.getItem('expire-value'));
+	if (localStorage.getItem('expire-multiplier') !== null) $('#multiplier').val(localStorage.getItem('expire-multiplier'));
 
 	$.fn.selectpicker.Constructor.BootstrapVersion = '4';
 
@@ -22,25 +19,23 @@ $(function() {
 	});
 
 	$('textarea').on('keydown', function(e) {
-		if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey && $(this).val()) {
+		if ((e.keyCode === 10 || e.keyCode === 13) && e.ctrlKey && $(this).val()) {
 			$(this).closest('form').submit();
 		}
 	});
 
-	$('input#expire').on('change', function(e) {
+	$('input#expire').on('change', (e) => {
 		var value = $(e.target).val();
 
-		$('#multiplier option').text(function(_, t) {
-			var plural = t.substring(t.length - 1) == 's';
+		$('#multiplier option').text((_, t) => {
+			var plural = t.slice(Math.max(0, t.length - 1)) === 's';
 
 			if (value > 1) {
 				if (!plural) {
 					return t + 's';
 				}
-			} else {
-				if (plural) {
-					return t.slice(0, -1);
-				}
+			} else if (plural) {
+				return t.slice(0, -1);
 			}
 
 			return t;
@@ -49,22 +44,22 @@ $(function() {
 		localStorage.setItem('expire-value', value);
 	});
 
-	$('#multiplier').on('change', function(e) {
+	$('#multiplier').on('change', (e) => {
 		localStorage.setItem('expire-multiplier', $(e.target).val());
 	});
 
 	$('select#highlight').on('change', function() {
-		if ($(this).val() == '') {
+		if ($(this).val() === '') {
 			history.pushState({}, '', '/');
 		} else {
 			location.hash = $(this).val();
 		}
 	});
 
-	$(window).on('hashchange', function() {
+	$(window).on('hashchange', () => {
 		var value = location.hash.slice(1);
 
-		if (value && $('select#highlight option[value=' + value + ']').length) {
+		if (value && $('select#highlight option[value=' + value + ']').length > 0) {
 			$('select#highlight').selectpicker('val', value);
 		} else {
 			$('select#highlight').selectpicker('val', '');

@@ -12,6 +12,8 @@
   },
   "keywords": [
     "pastebin",
+    "text upload",
+    "text paste",
     "paste",
     "koa",
     "mongodb"
@@ -42,7 +44,7 @@
   "devDependencies": {
     "eclint": "^2.8.1",
     "nodemon": "^2.0.4",
-    "pug-lint": "^2.6.0"
+    "pug-lint": "^2.6.0",
     "xo": "^0.32.1"
   }
 }

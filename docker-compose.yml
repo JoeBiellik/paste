@@ -3,25 +3,25 @@ version: "3"
 services:
   app:
     image: node:latest
-    command: "npm start"
+    command: npm start
     restart: unless-stopped
     working_dir: /app
     depends_on:
-     - db
+      - db
     environment:
       - NODE_ENV=production
       - NODE_CONFIG_ENV=docker
     volumes:
-     - .:/app:Z
+      - .:/app:Z
     ports:
-     - "80:80"
+      - "80:80"
 
   db:
     image: mongo:latest
     restart: unless-stopped
     volumes:
-     - ./db:/data/db:Z
+      - ./db:/data/db:Z
     expose:
-     - 27017
+      - 27017
     ports:
-     - "27017:27017"
+      - "27017:27017"
