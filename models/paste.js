@@ -6,6 +6,7 @@ const nanoid = customAlphabet(dictionary.nolookalikes, 8);
 const paste = new mongoose.Schema({
 	_id: { type: String, default: nanoid },
 	paste: { type: String },
+	ip: { type: String },
 	expiresAt: { type: Date, expires: 0 }
 }, {
 	timestamps: true

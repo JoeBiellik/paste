@@ -101,6 +101,7 @@ module.exports = {
 
 		const paste = new Paste({
 			paste: ctx.request.body.paste,
+			ip: ctx.request.ip,
 			expiresAt: new Date(Date.now() + (ctx.request.body.expire * 1000))
 		});
 
