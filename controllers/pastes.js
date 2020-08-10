@@ -4,6 +4,16 @@ const isBinaryFile = require('isbinaryfile').isBinaryFile;
 const Paste = require('../models/paste');
 
 module.exports = {
+	async index(ctx) {
+		await ctx.render('index', {
+			pretty: config.prettyHtml,
+			title: config.name,
+			url: ctx.request.origin,
+			expires: config.expires,
+			highlights: config.highlights
+		});
+	},
+
 	async view(ctx) {
 		try {
 			const paste = await Paste.findById(ctx.params.id).exec();
