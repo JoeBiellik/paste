@@ -19,7 +19,7 @@
   "main": "server.js",
   "scripts": {
     "watch": "nodemon -L -e js,json,pug -i ./public",
-    "lint": "eslint . && pug-lint ./views"
+    "lint": "xo && pug-lint ./views && eclint ."
   },
   "dependencies": {
     "bytes": "^3.1.0",
@@ -40,8 +40,9 @@
     "pug": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.5.0",
+    "eclint": "^2.8.1",
     "nodemon": "^2.0.4",
     "pug-lint": "^2.6.0"
+    "xo": "^0.32.1"
   }
 }

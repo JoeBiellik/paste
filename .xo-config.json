@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "arrow-parens": ["error", "always"],
+    "curly": ["error", "multi-line"],
+    "new-cap": ["error", {
+      "capIsNew": false
+    }],
+    "no-console": ["error", {
+      "allow": ["warn", "error"]
+    }],
+    "object-curly-spacing": ["error", "always"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never"
+    }],
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/catch-error-name": ["error", {
+      "name": "err"
+    }],
+    "import/no-unassigned-import": ["error", {
+      "allow": ["db"]
+    }],
+    "quotes": ["error", "single", {
+      "avoidEscape": true
+    }]
+  },
+  "overrides": [{
+    "files": "public/*.js",
+    "esnext": false,
+    "envs": ["browser", "jquery"],
+    "globals": ["autosize"],
+    "rules": {
+      "camelcase": ["error", {
+        "allow": ["buttondown_class", "buttonup_class"]
+      }]
+    }
+  }]
+}
