@@ -41,12 +41,12 @@ module.exports = {
 	async create(ctx) {
 		ctx.set('Cache-Control', 'no-cache');
 
-		// Request body
-		if (!ctx.request.body.paste && ctx.request.files) {
-			try {
-				// Request body, xxx
-				let path = Object.values(ctx.request.files)[0].path;
+		// File body
+		if (ctx.request.files && Object.keys(ctx.request.files).length > 0) {
+			// Request body, xxx
+			let path = Object.values(ctx.request.files)[0].path;
 
+			try {
 				// Request body, paste=xxx
 				if (ctx.request.files.paste) {
 					path = ctx.request.files.paste.path;
@@ -55,18 +55,29 @@ module.exports = {
 				const data = await fs.readFile(path);
 				const stat = await fs.lstat(path);
 
-				if (isBinaryFile(data, stat.size)) ctx.throw();
+				if (await isBinaryFile(data, stat.size)) ctx.throw('Binary file');
 
-				ctx.request.body.paste = data;
-
+				ctx.request.body.paste = data.toString();
+			} catch {
+				ctx.throw(400, 'Bad Paste Body');
+			} finally {
 				try {
 					await fs.unlink(path);
 				} catch {
 					// Ignore
 				}
-			} catch {
-				ctx.throw(400, 'Bad Paste Body');
 			}
+		}
+
+		// Raw body
+		if (typeof ctx.request.body === 'string') {
+			ctx.request.body = {
+				paste: ctx.request.body
+			};
+		}
+
+		if (!ctx.request.body.paste) {
+			ctx.throw(400, 'No Paste Provided');
 		}
 
 		// Expiry multiplier
@@ -76,17 +87,6 @@ module.exports = {
 			}
 		} catch {
 			ctx.throw(400, 'Bad Paste Expiry');
-		}
-
-		// Raw request body
-		if (typeof ctx.request.body === 'string') {
-			ctx.request.body = {
-				paste: ctx.request.body
-			};
-		}
-
-		if (!ctx.request.body.paste) {
-			ctx.throw(400, 'No Paste Provided');
 		}
 
 		// /?expire=xxx
