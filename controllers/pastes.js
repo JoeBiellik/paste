@@ -1,6 +1,8 @@
 const config = require('config');
 const fs = require('fs').promises;
 const isBinaryFile = require('isbinaryfile').isBinaryFile;
+const detectCharacterEncoding = require('detect-character-encoding');
+const encoding = require('encoding');
 const Paste = require('../models/paste');
 
 module.exports = {
@@ -52,12 +54,12 @@ module.exports = {
 					path = ctx.request.files.paste.path;
 				}
 
+				if (await isBinaryFile(path)) ctx.throw('Binary file');
+
 				const data = await fs.readFile(path);
-				const stat = await fs.lstat(path);
+				const detectedEncoding = detectCharacterEncoding(data);
 
-				if (await isBinaryFile(data, stat.size)) ctx.throw('Binary file');
-
-				ctx.request.body.paste = data.toString();
+				ctx.request.body.paste = encoding.convert(data, 'utf8', detectedEncoding.encoding).toString();
 			} catch {
 				ctx.throw(400, 'Bad Paste Body');
 			} finally {
